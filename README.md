@@ -1,4 +1,4 @@
-# Docker-SSH [![Docker Stars](https://img.shields.io/docker/stars/jeroenpeeters/docker-ssh.svg?style=flat-square)](https://hub.docker.com/r/jeroenpeeters/docker-ssh/) [![Docker Stars](https://img.shields.io/docker/pulls/jeroenpeeters/docker-ssh.svg?style=flat-square)](https://hub.docker.com/r/jeroenpeeters/docker-ssh/)
+# Docker-SSH [![Docker Stars](https://img.shields.io/docker/stars/jeromebreton/docker-ssh.svg?style=flat-square)](https://hub.docker.com/r/jeromebreton/docker-ssh/) [![Docker Stars](https://img.shields.io/docker/pulls/jeromebreton/docker-ssh.svg?style=flat-square)](https://hub.docker.com/r/jeromebreton/docker-ssh/)
 SSH Server for Docker containers  ~ Because every container should be accessible.
 
 Want to SSH into your container right away? Here you go:
@@ -6,7 +6,7 @@ Want to SSH into your container right away? Here you go:
     $ docker run -d -p 2222:22 \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -e CONTAINER=my-container -e AUTH_MECHANISM=noAuth \
-      jeroenpeeters/docker-ssh
+      jeromebreton/docker-ssh
 
     $ ssh -p 2222 localhost
 
@@ -59,7 +59,7 @@ Let's assume you have a running container with name 'web-server1'. Run the follo
     docker run -e CONTAINER=web-server1 -e AUTH_MECHANISM=noAuth \
       --name sshd-web-server1 -p 2222:22  --rm \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      jeroenpeeters/docker-ssh
+      jeromebreton/docker-ssh
 
 The SSH server in this example is now running in its own container named 'sshd-web-server1' and exposes the SSH
 service on port 2222.
@@ -81,7 +81,7 @@ Now you can access the container through SSH by using your favorite client. The 
 
 Docker-SSH also implements a web terminal for convenience. The web terminal allows you to connect to your shell using a browser. Below is a screenshot of the web terminal in action.
 
-![Docker-SSH Web Terminal](https://raw.githubusercontent.com/jeroenpeeters/docker-ssh/master/docker-web-terminal.png)
+![Docker-SSH Web Terminal](https://raw.githubusercontent.com/jeromebreton/docker-ssh/master/docker-web-terminal.png)
 
 The web terminal is enabled by default, and exposed on port 8022. To disable the web terminal set `-e HTTP_ENABLED=false`.
 
@@ -133,7 +133,7 @@ by setting `AUTH_USER` and `AUTH_PASSWORD`.
       -v /var/run/docker.sock:/var/run/docker.sock \
       -e CONTAINER=my-container -e AUTH_MECHANISM=simpleAuth \
       -e AUTH_USER=jeroen -e AUTH_PASSWORD=1234 \
-      jeroenpeeters/docker-ssh
+      jeromebreton/docker-ssh
 
     $ ssh -p 2222 jeroen@localhost
     $ jeroen@localhost's password: ****
@@ -148,7 +148,7 @@ It is a single string with semicolon (;) separated user:password pairs.
       -v /var/run/docker.sock:/var/run/docker.sock \
       -e CONTAINER=my-container -e AUTH_MECHANISM=multiUser \
       -e AUTH_TUPLES="jeroen:thefather;luke:theforce" \
-      jeroenpeeters/docker-ssh
+      jeromebreton/docker-ssh
 
     $ ssh -p 2222 luke@localhost
     $ luke@localhost's password: ****
@@ -164,7 +164,7 @@ The name of the authorized_keys file is configured by setting `AUTHORIZED_KEYS`.
       -v ./authorized_keys:/authorized_keys
       -e CONTAINER=my-container -e AUTH_MECHANISM=publicKey \
       -e AUTHORIZED_KEYS=/authorized_keys \
-      jeroenpeeters/docker-ssh
+      jeromebreton/docker-ssh
 
     $ ssh -p 2222 luke@localhost
 
