@@ -14,7 +14,7 @@ header = (container) ->
   " ###############################################################\r\n" +
   "\r\n"
 
-module.exports = (container, shell, shell_user) ->
+module.exports = (container, shell, shell_user, init_commands) ->
   instance: ->
     session = null
     channel = null
@@ -86,8 +86,7 @@ module.exports = (container, shell, shell_user) ->
               log.info {container: container}, 'Terminal exited'
               closeChannel()
 
-            stream.write 'export TERM=linux;\n'
-            stream.write 'export PS1="\\w $ ";\n\n'
+            stream.write init_commands
 
             channel.on 'data', (data) ->
               stream.write data

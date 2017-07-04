@@ -14,6 +14,7 @@ keypath         = process.env.KEYPATH
 container       = process.env.CONTAINER
 shell           = process.env.CONTAINER_SHELL
 shell_user      = process.env.SHELL_USER || 'root'
+init_commands   = process.env.INIT_COMMANDS || 'export TERM=linux;export PS1="\\w $ ";\n'
 authMechanism   = process.env.AUTH_MECHANISM
 authenticationHandler = require('./src/auth') authMechanism
 
@@ -32,7 +33,7 @@ exitOnConfigError "Unknown AUTH_MECHANISM: #{authMechanism}"  unless authenticat
 options =
   privateKey: fs.readFileSync keypath
 
-sessionFactory = handlerFactory container, shell, shell_user
+sessionFactory = handlerFactory container, shell, shell_user, init_commands
 
 sshServer = new ssh2.Server options, (client, info) ->
   session = sessionFactory.instance()

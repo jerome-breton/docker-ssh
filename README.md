@@ -52,6 +52,7 @@ message if you whish to contribute to this project.
 - [ ] Secure FTP implementation (SFTP)
 - [ ] Access multiple containers
 - [x] Run commands as specific user
+- [x] Send custom commands on login
 
 # Add SSH capabilities to any container!
 Let's assume you have a running container with name 'web-server1'. Run the following command to start Docker-SSH:
@@ -179,16 +180,17 @@ In that case you can omit the `KEYPATH` argument. Example: `-v /path/to/my/key:/
 Arguments to Docker-SSH are passed as Docker environment variables. Docker-SSH needs at least the *CONTAINER*
 argument in order to know for which container to provide SSH. Mounting the Docker socket into the SSH container is mandatory since Docker-SSH internally uses *docker exec* to create a shell session.
 
-Argument       | Default  | Description
----------------|----------|------------------------------------------------------
-CONTAINER      | None     | *name* or *id* of a running container
-CONTAINER_SHELL| bash     | path to a shell.
-AUTH_MECHANISM | None     | name of the authentication mechanism, see [User Authentication](#user-authentication)
-KEYPATH        | ./id_rsa | path to a private key to use as server identity
-PORT           | 22       | ssh server listens on this port
-HTTP_ENABLED   | true     | enable/disable the web terminal
-HTTP_PORT      | 8022     | web terminal listens on this port
-SHELL_USER     | root     | Run commands as this user *(Note: independant from authentication user)*
+Argument       | Default                                    | Description
+---------------|--------------------------------------------|--------------------------------------------------------------------------------------
+CONTAINER      | None                                       | *name* or *id* of a running container
+CONTAINER_SHELL| `bash`                                     | path to a shell.
+AUTH_MECHANISM | None                                       | name of the authentication mechanism, see [User Authentication](#user-authentication)
+KEYPATH        | ./id_rsa                                   | path to a private key to use as server identity
+PORT           | 22                                         | ssh server listens on this port
+HTTP_ENABLED   | true                                       | enable/disable the web terminal
+HTTP_PORT      | 8022                                       | web terminal listens on this port
+SHELL_USER     | root                                       | Run commands as this user *(Note: independant from authentication user)*
+INIT_COMMANDS  | `export TERM=linux;export PS1="\\w $ ";\n` | Run commands on user login
 
 # Credits
 I couldn't have created Docker-SSH without the following great Node packages! Many thanks go to the authors of:
