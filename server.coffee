@@ -14,7 +14,7 @@ keypath         = process.env.KEYPATH
 container       = process.env.CONTAINER
 shell           = process.env.CONTAINER_SHELL
 shell_user      = process.env.SHELL_USER or 'root'
-init_commands   = process.env.INIT_COMMANDS or 'export TERM=linux;export PS1="\\w $ ";'
+init_commands   = process.env.INIT_COMMANDS or "export TERM=linux;\nexport PS1=\"\\w $ \";\n\n"
 authMechanism   = process.env.AUTH_MECHANISM
 authenticationHandler = require('./src/auth') authMechanism
 
