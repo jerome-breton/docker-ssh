@@ -13,8 +13,8 @@ ip              = process.env.IP or '0.0.0.0'
 keypath         = process.env.KEYPATH
 container       = process.env.CONTAINER
 shell           = process.env.CONTAINER_SHELL
-shell_user      = process.env.SHELL_USER || 'root'
-init_commands   = process.env.INIT_COMMANDS || 'export TERM=linux;export PS1="\\w $ ";\n'
+shell_user      = process.env.SHELL_USER or 'root'
+init_commands   = process.env.INIT_COMMANDS or 'export TERM=linux;export PS1="\\w $ ";'
 authMechanism   = process.env.AUTH_MECHANISM
 authenticationHandler = require('./src/auth') authMechanism
 
